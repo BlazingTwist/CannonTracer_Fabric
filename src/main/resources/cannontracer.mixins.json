@@ -1,0 +1,24 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "blazingtwist.cannontracer.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "PlayerManagerMixin",
+    "ServerWorldMixin",
+    "EntityMixin",
+    "CommandBlockExecutorMixin",
+    "WorldMixin",
+    "ExplosionMixin"
+  ],
+  "client": [
+    "WorldRendererMixin",
+    "KeyboardMixin",
+    "MinecraftClientMixin"
+  ],
+  "server": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

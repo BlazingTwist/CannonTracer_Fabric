@@ -1,29 +1,32 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "cannontracer",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Cannon Tracer",
+  "description": "Tracks movement of Entities",
   "authors": [
-    "Me!"
+    "BlazingTwist"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/BlazingTwist",
+    "sources": "https://github.com/BlazingTwist/CannonTracer_Fabric"
   },
 
-  "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "license": "Apache-2.0",
+  "icon": "assets/cannontracer/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "blazingtwist.cannontracer.CannonTracerMod"
+    ],
+    "client": [
+      "blazingtwist.cannontracer.CannonTracerMod"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "cannontracer.mixins.json"
   ],
 
   "depends": {
@@ -33,6 +36,5 @@
     "java": ">=17"
   },
   "suggests": {
-    "another-mod": "*"
   }
 }

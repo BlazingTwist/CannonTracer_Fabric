@@ -4,6 +4,8 @@
 build/
 out/
 classes/
+!/gradlew
+!/gradlew.bat
 
 # eclipse
 
@@ -38,3 +40,5 @@ hs_err_*.log
 replay_*.log
 *.hprof
 *.jfr
+
+dependencies/
