@@ -113,16 +113,21 @@ public class TestCannonData {
 		@JsonProperty("amount")
 		private int amount;
 
+		@JsonProperty("random")
+		private boolean random;
+
 		@JsonProperty("note")
 		private String note;
 
 		public CannonCharge() {
+			random = false;
 		}
 
-		public CannonCharge(boolean enabled, int delay, int amount, String note) {
+		public CannonCharge(boolean enabled, int delay, int amount, boolean random, String note) {
 			this.enabled = enabled;
 			this.delay = delay;
 			this.amount = amount;
+			this.random = random;
 			this.note = note;
 		}
 
@@ -130,36 +135,40 @@ public class TestCannonData {
 			return enabled;
 		}
 
-		public CannonCharge setEnabled(boolean enabled) {
+		public void setEnabled(boolean enabled) {
 			this.enabled = enabled;
-			return this;
 		}
 
 		public int getDelay() {
 			return delay;
 		}
 
-		public CannonCharge setDelay(int delay) {
+		public void setDelay(int delay) {
 			this.delay = delay;
-			return this;
 		}
 
 		public int getAmount() {
 			return amount;
 		}
 
-		public CannonCharge setAmount(int amount) {
+		public void setAmount(int amount) {
 			this.amount = amount;
-			return this;
+		}
+
+		public boolean getRandom() {
+			return random;
+		}
+
+		public void setRandom(boolean random) {
+			this.random = random;
 		}
 
 		public String getNote() {
 			return note;
 		}
 
-		public CannonCharge setNote(String note) {
+		public void setNote(String note) {
 			this.note = note;
-			return this;
 		}
 	}
 

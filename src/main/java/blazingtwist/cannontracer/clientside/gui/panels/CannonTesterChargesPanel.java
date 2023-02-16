@@ -71,6 +71,7 @@ public class CannonTesterChargesPanel extends WPlainPanel {
 			x += addLabel("gui.cannontester.editor_tab.charge_enabled", x, 48) + xGap;
 			x += addLabel("gui.cannontester.editor_tab.charge_amount", x, 48 + 16 + 16) + xGap;
 			x += addLabel("gui.cannontester.editor_tab.charge_delay", x, 48 + 16 + 16) + xGap;
+			x += addLabel("gui.cannontester.editor_tab.charge_random", x, 48) + xGap;
 			addLabel("gui.cannontester.editor_tab.charge_note", x, 160);
 
 			this.setSize(x + 160, 16);
@@ -131,7 +132,7 @@ public class CannonTesterChargesPanel extends WPlainPanel {
 		}
 
 		public void createCharge() {
-			TestCannonData.CannonCharge charge = new TestCannonData.CannonCharge(true, 0, 0, "");
+			TestCannonData.CannonCharge charge = new TestCannonData.CannonCharge(true, 0, 0, false, "");
 			ChargeRow row = new ChargeRow(this, charge);
 			this.add(row);
 			row.setHost(this.getHost());
@@ -170,6 +171,7 @@ public class CannonTesterChargesPanel extends WPlainPanel {
 			x += addEnabledToggle(x) + xGap;
 			x += addIntegerInput(x, charge::getAmount, charge::setAmount) + xGap;
 			x += addIntegerInput(x, charge::getDelay, charge::setDelay) + xGap;
+			x += addRandomToggle(x) + xGap;
 			addNoteInput(x);
 		}
 
@@ -193,6 +195,13 @@ public class CannonTesterChargesPanel extends WPlainPanel {
 					supplier, consumer, null);
 			intField.field.setText(Integer.toString(supplier.get()));
 			return intField.width;
+		}
+
+		private int addRandomToggle(int x) {
+			ToggleButton button = new ToggleButton(CTTextures.BUTTON_PACKAGE_VANILLA_50, charge.getRandom());
+			button.setOnToggleListener(charge::setRandom);
+			this.add(button, x, 0, 48, 16);
+			return 48;
 		}
 
 		private void addNoteInput(int x) {

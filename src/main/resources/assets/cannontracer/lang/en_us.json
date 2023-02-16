@@ -53,5 +53,6 @@
   "gui.cannontester.editor_tab.charge_enabled": "Enabled",
   "gui.cannontester.editor_tab.charge_amount": "Amount",
   "gui.cannontester.editor_tab.charge_delay": "Delay",
+  "gui.cannontester.editor_tab.charge_random": "Random Hop",
   "gui.cannontester.editor_tab.charge_note": "Note"
 }

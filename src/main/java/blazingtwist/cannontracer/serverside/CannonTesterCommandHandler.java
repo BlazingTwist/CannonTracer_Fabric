@@ -89,7 +89,7 @@ public class CannonTesterCommandHandler {
 	}
 
 	public void writeCannonToBlock(ServerPlayerEntity player, Vec3i cmdPos, TestCannonData cannon) {
-		
+
 		BlockPos blockPos = new BlockPos(cmdPos);
 		BlockState blockState = player.world.getBlockState(blockPos);
 		if (blockState == null || blockState.isAir() || !isCommandBlock(blockState)) {
@@ -140,7 +140,8 @@ public class CannonTesterCommandHandler {
 					continue;
 				}
 				final int amount = charge.getAmount();
-				scheduledTicks.add(new ScheduledTick(charge.getDelay(), () -> spawnTnt(world, spawnX, spawnY, spawnZ, velocity, amount)));
+				final boolean random = charge.getRandom();
+				scheduledTicks.add(new ScheduledTick(charge.getDelay(), () -> spawnTnt(world, spawnX, spawnY, spawnZ, velocity, amount, random)));
 			}
 		}
 	}
@@ -160,11 +161,15 @@ public class CannonTesterCommandHandler {
 		}
 	}
 
-	private void spawnTnt(ServerWorld world, double x, double y, double z, Vec3d velocity, int amount) {
+	private void spawnTnt(ServerWorld world, double x, double y, double z, Vec3d velocity, int amount, boolean randomHop) {
 		for (int i = 0; i < amount; i++) {
 			TntEntity tntEntity = new TntEntity(world, x, y, z, null);
 			tntEntity.setFuse(80);
-			tntEntity.setVelocity(velocity);
+			if (randomHop) {
+				tntEntity.setVelocity(tntEntity.getVelocity().add(velocity));
+			} else {
+				tntEntity.setVelocity(velocity);
+			}
 			world.spawnEntity(tntEntity);
 		}
 	}

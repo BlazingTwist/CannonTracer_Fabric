@@ -27,6 +27,7 @@ public class TestCannonMarshaller {
 			buffer.writeBoolean(charge.isEnabled());
 			buffer.writeVarInt(charge.getDelay());
 			buffer.writeVarInt(charge.getAmount());
+			buffer.writeBoolean(charge.getRandom());
 			buffer.writeString(charge.getNote());
 		}
 
@@ -51,8 +52,9 @@ public class TestCannonMarshaller {
 			boolean enabled = buffer.readBoolean();
 			int delay = buffer.readVarInt();
 			int amount = buffer.readVarInt();
+			boolean random = buffer.readBoolean();
 			String note = buffer.readString();
-			charges.add(new TestCannonData.CannonCharge(enabled, delay, amount, note));
+			charges.add(new TestCannonData.CannonCharge(enabled, delay, amount, random, note));
 		}
 
 		callback.acceptData(commandPos, cannon);
