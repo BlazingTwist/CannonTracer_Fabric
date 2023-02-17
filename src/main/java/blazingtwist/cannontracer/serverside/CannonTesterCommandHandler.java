@@ -56,7 +56,8 @@ public class CannonTesterCommandHandler {
 			.disable(MapperFeature.AUTO_DETECT_CREATORS,
 					MapperFeature.AUTO_DETECT_FIELDS,
 					MapperFeature.AUTO_DETECT_GETTERS,
-					MapperFeature.AUTO_DETECT_IS_GETTERS)
+					MapperFeature.AUTO_DETECT_IS_GETTERS,
+					MapperFeature.AUTO_DETECT_SETTERS)
 			.build();
 
 	private static CannonTesterCommandHandler instance;
