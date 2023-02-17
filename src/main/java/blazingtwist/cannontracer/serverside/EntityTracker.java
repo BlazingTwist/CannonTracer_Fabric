@@ -140,6 +140,7 @@ public class EntityTracker {
 							return tracingHistory.get(entry.getKey()).values().stream()
 									.filter(chain -> chain.creationTick + memoryTicks >= requestServerTick
 											&& chain.isInRange(playerPosition, playerSettings.maxRange))
+									.map(EntityDataChain::copy)
 									.collect(Collectors.toList());
 						}));
 			}

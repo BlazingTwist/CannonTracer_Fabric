@@ -33,6 +33,12 @@ public class EntityDataChain {
 		return links.stream().anyMatch(link -> link.position.squaredDistanceTo(position) < squaredMaxDistance);
 	}
 
+	public EntityDataChain copy() {
+		EntityDataChain copyResult = new EntityDataChain(creationTick);
+		copyResult.links.addAll(links);
+		return copyResult;
+	}
+
 	public record ChainLink(Vec3d position, Vec3d velocity) {
 	}
 
