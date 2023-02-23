@@ -9,6 +9,7 @@
   "gui.cannontracer.entity_tab.label_blue": "blue",
   "gui.cannontracer.entity_tab.label_alpha": "alpha",
   "gui.cannontracer.entity_tab.label_render": "render",
+  "gui.cannontracer.entity_tab.label_exposureBox": "expBox",
 
   "gui.cannontracer.hot_keys_tab.title": "Hot Keys",
   "gui.cannontracer.hot_keys_tab.label_commands": "Commands",

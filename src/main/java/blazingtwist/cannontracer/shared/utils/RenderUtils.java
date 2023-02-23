@@ -8,21 +8,24 @@ import net.minecraft.util.math.Box;
 public class RenderUtils {
 
 	public static void drawHitBox(BufferBuilder buffer, FinalVec3d position, Color color, double boxRadius) {
-		double boxDiameter = boxRadius * 2;
+		drawBox(buffer, position, color, boxRadius, boxRadius * 2);
+	}
+
+	public static void drawBox(BufferBuilder buffer, FinalVec3d position, Color color, double boxRadius, double boxHeight) {
 		pushXLine(buffer, position.x() - boxRadius, position.x() + boxRadius, position.y(), position.z() - boxRadius, color);
 		pushXLine(buffer, position.x() - boxRadius, position.x() + boxRadius, position.y(), position.z() + boxRadius, color);
-		pushXLine(buffer, position.x() - boxRadius, position.x() + boxRadius, position.y() + boxDiameter, position.z() - boxRadius, color);
-		pushXLine(buffer, position.x() - boxRadius, position.x() + boxRadius, position.y() + boxDiameter, position.z() + boxRadius, color);
+		pushXLine(buffer, position.x() - boxRadius, position.x() + boxRadius, position.y() + boxHeight, position.z() - boxRadius, color);
+		pushXLine(buffer, position.x() - boxRadius, position.x() + boxRadius, position.y() + boxHeight, position.z() + boxRadius, color);
 
-		pushYLine(buffer, position.x() - boxRadius, position.y(), position.y() + boxDiameter, position.z() - boxRadius, color);
-		pushYLine(buffer, position.x() - boxRadius, position.y(), position.y() + boxDiameter, position.z() + boxRadius, color);
-		pushYLine(buffer, position.x() + boxRadius, position.y(), position.y() + boxDiameter, position.z() - boxRadius, color);
-		pushYLine(buffer, position.x() + boxRadius, position.y(), position.y() + boxDiameter, position.z() + boxRadius, color);
+		pushYLine(buffer, position.x() - boxRadius, position.y(), position.y() + boxHeight, position.z() - boxRadius, color);
+		pushYLine(buffer, position.x() - boxRadius, position.y(), position.y() + boxHeight, position.z() + boxRadius, color);
+		pushYLine(buffer, position.x() + boxRadius, position.y(), position.y() + boxHeight, position.z() - boxRadius, color);
+		pushYLine(buffer, position.x() + boxRadius, position.y(), position.y() + boxHeight, position.z() + boxRadius, color);
 
 		pushZLine(buffer, position.x() - boxRadius, position.y(), position.z() - boxRadius, position.z() + boxRadius, color);
 		pushZLine(buffer, position.x() + boxRadius, position.y(), position.z() - boxRadius, position.z() + boxRadius, color);
-		pushZLine(buffer, position.x() - boxRadius, position.y() + boxDiameter, position.z() - boxRadius, position.z() + boxRadius, color);
-		pushZLine(buffer, position.x() + boxRadius, position.y() + boxDiameter, position.z() - boxRadius, position.z() + boxRadius, color);
+		pushZLine(buffer, position.x() - boxRadius, position.y() + boxHeight, position.z() - boxRadius, position.z() + boxRadius, color);
+		pushZLine(buffer, position.x() + boxRadius, position.y() + boxHeight, position.z() - boxRadius, position.z() + boxRadius, color);
 	}
 
 	public static void pushXLine(BufferBuilder buffer, double x0, double x1, double y, double z, Color color) {

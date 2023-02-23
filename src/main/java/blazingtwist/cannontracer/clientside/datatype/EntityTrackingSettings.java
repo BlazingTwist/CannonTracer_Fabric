@@ -6,6 +6,9 @@ public class EntityTrackingSettings {
 	@JsonProperty("render")
 	private boolean render = true;
 
+	@JsonProperty("exposureBox")
+	private boolean exposureBox = false;
+
 	@JsonProperty("time")
 	private float time = 10;
 
@@ -33,44 +36,47 @@ public class EntityTrackingSettings {
 		return render;
 	}
 
-	public EntityTrackingSettings setRender(boolean render) {
+	public void setRender(boolean render) {
 		this.render = render;
-		return this;
+	}
+
+	public boolean isExposureBox() {
+		return exposureBox;
+	}
+
+	public void setExposureBox(boolean exposureBox) {
+		this.exposureBox = exposureBox;
 	}
 
 	public float getTime() {
 		return time;
 	}
 
-	public EntityTrackingSettings setTime(float time) {
+	public void setTime(float time) {
 		this.time = time;
-		return this;
 	}
 
 	public float getThickness() {
 		return thickness;
 	}
 
-	public EntityTrackingSettings setThickness(float thickness) {
+	public void setThickness(float thickness) {
 		this.thickness = thickness;
-		return this;
 	}
 
 	public Color getColor() {
 		return color;
 	}
 
-	public EntityTrackingSettings setColor(Color color) {
+	public void setColor(Color color) {
 		this.color.set(color);
-		return this;
 	}
 
 	public double getHitBoxRadius() {
 		return hitBoxRadius;
 	}
 
-	public EntityTrackingSettings setHitBoxRadius(double hitBoxRadius) {
+	public void setHitBoxRadius(double hitBoxRadius) {
 		this.hitBoxRadius = hitBoxRadius;
-		return this;
 	}
 }

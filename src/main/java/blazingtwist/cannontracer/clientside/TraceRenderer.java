@@ -280,6 +280,11 @@ public class TraceRenderer implements RenderController.LineRendererListener {
 				Color invColor = color.copy().invert();
 				double boxRadius = entitySettings.getHitBoxRadius();
 
+				final boolean drawExposureBox = entitySettings.isExposureBox();
+				final Color exposureBoxColor = drawExposureBox ? new Color(196, 196, 196, 255) : null;
+				final double exposureBoxRadius = drawExposureBox ? computeExposureBoxRadius(boxRadius) : 0;
+				final double exposureBoxHeight = drawExposureBox ? computeExposureBoxHeight(boxRadius) : 0;
+
 				BufferBuilder bufferBuilder = context.getBufferBuilder();
 				bufferBuilder.begin(VertexFormat.DrawMode.LINES, VertexFormats.LINES);
 				RenderSystem.lineWidth(entitySettings.getThickness());
@@ -291,12 +296,38 @@ public class TraceRenderer implements RenderController.LineRendererListener {
 						continue;
 					}
 
-					RenderUtils.drawHitBox(bufferBuilder, traceEntry.getKey().toPosition, isDespawnTrace ? invColor : color, boxRadius);
+					FinalVec3d toPosition = traceEntry.getKey().toPosition;
+					RenderUtils.drawHitBox(bufferBuilder, toPosition, isDespawnTrace ? invColor : color, boxRadius);
+					if (drawExposureBox && !isDespawnTrace) {
+						RenderUtils.drawBox(bufferBuilder, toPosition, exposureBoxColor, exposureBoxRadius, exposureBoxHeight);
+					}
 				}
 
 				context.getTessellator().draw();
 			}
 		}
+	}
+
+	private static double computeExposureBoxRadius(double boxRadius) {
+		double boxWidth = boxRadius * 2;
+		double boxStep = 1.0 / ((boxWidth * 2) + 1);
+		double boxSteps = Math.floor(1.0 / boxStep);
+		double maxBoxSamplePoint = boxSteps * boxStep;
+
+		// notice that 1.0 is used here, meaning that the offset does not respect the actual box size
+		double boxOffset = (1.0 - maxBoxSamplePoint) / 2.0;
+
+		// to help users build orientation-independent cannons, compute the worst-case exposureBox size
+		double minDotPos = (-boxRadius) + boxOffset;
+		double maxDotPos = minDotPos + (maxBoxSamplePoint * boxWidth);
+		return Math.max(Math.abs(minDotPos), Math.abs(maxDotPos));
+	}
+
+	private static double computeExposureBoxHeight(double boxRadius) {
+		double boxWidth = boxRadius * 2;
+		double boxStep = 1.0 / ((boxWidth * 2) + 1);
+		double boxSteps = Math.floor(1.0 / boxStep);
+		return boxSteps * boxStep * boxWidth;
 	}
 
 	public static record TracePos(

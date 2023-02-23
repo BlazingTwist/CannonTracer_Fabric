@@ -1,6 +1,7 @@
 package blazingtwist.cannontracer.clientside.datatype;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import net.minecraft.util.math.MathHelper;
 
 public class Color {
 	@JsonProperty("red")
@@ -81,6 +82,42 @@ public class Color {
 		red = 255 - red;
 		green = 255 - green;
 		blue = 255 - blue;
+		return this;
+	}
+
+	/**
+	 * Adds 'value' to each component and returns 'this'
+	 *
+	 * @param value the value to add to each color component
+	 * @return this Color Object
+	 */
+	public Color add(int value) {
+		red = Math.max(0, Math.min(255, red + value));
+		green = Math.max(0, Math.min(255, green + value));
+		blue = Math.max(0, Math.min(255, blue + value));
+		return this;
+	}
+
+	public Color mul(float value) {
+		red = Math.min(255, MathHelper.floor(red * value));
+		green = Math.min(255, MathHelper.floor(green * value));
+		blue = Math.min(255, MathHelper.floor(blue * value));
+		return this;
+	}
+
+	/**
+	 * Convert this color to grayScale
+	 *
+	 * @return this Color Object
+	 */
+	public Color toGray() {
+		double rLuma = (red / 255d) * 0.2989;
+		double gLuma = (green / 255d) * 0.5870;
+		double bLuma = (blue / 255d) * 0.1140;
+		int gray = MathHelper.floor((rLuma + gLuma + bLuma) * 255);
+		this.red = gray;
+		this.green = gray;
+		this.blue = gray;
 		return this;
 	}
 

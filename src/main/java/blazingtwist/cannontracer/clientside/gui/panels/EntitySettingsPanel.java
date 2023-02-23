@@ -81,6 +81,7 @@ public class EntitySettingsPanel extends WPlainPanel {
 		private final BetterTextField blueField;
 		private final BetterTextField alphaField;
 		private final ToggleButton renderToggleButton;
+		private final ToggleButton exposureBoxToggleButton;
 		private final TextureButton deleteButton;
 
 		private String currentlyRegisteredEntityID = null;
@@ -130,7 +131,11 @@ public class EntitySettingsPanel extends WPlainPanel {
 
 			renderToggleButton = new ToggleButton(CTTextures.BUTTON_PACKAGE_VANILLA_50, true);
 			renderToggleButton.setOnToggleListener(this::onRenderChanged);
-			Columns.Render.placeOffset(this, renderToggleButton, 0, -1);
+			Columns.Render.placeOffset(this, renderToggleButton, 0, 0);
+
+			exposureBoxToggleButton = new ToggleButton(CTTextures.BUTTON_PACKAGE_VANILLA_50, true);
+			exposureBoxToggleButton.setOnToggleListener(this::onExposureBoxChanged);
+			Columns.ExposureBox.placeOffset(this, exposureBoxToggleButton, 0, 0);
 
 			deleteButton = new TextureButton(CTTextures.BUTTON_PACKAGE_RED_CIRCLE);
 			deleteButton.setLabelTexture(CTTextures.ICON_CROSS);
@@ -156,6 +161,7 @@ public class EntitySettingsPanel extends WPlainPanel {
 			alphaField.setText(Integer.toString(color.getAlpha()));
 
 			renderToggleButton.setState(entitySettings.isRender());
+			exposureBoxToggleButton.setState(entitySettings.isExposureBox());
 		}
 
 		private void onEntityIDChanged(String newValue) {
@@ -228,6 +234,10 @@ public class EntitySettingsPanel extends WPlainPanel {
 			entitySettings.setRender(newValue);
 		}
 
+		private void onExposureBoxChanged(boolean newValue) {
+			entitySettings.setExposureBox(newValue);
+		}
+
 		private void onDeleteClicked() {
 			removeEntityID(currentlyRegisteredEntityID);
 			recomputeListWidget();
@@ -273,15 +283,16 @@ public class EntitySettingsPanel extends WPlainPanel {
 	}
 
 	private enum Columns {
-		EntityID("gui.cannontracer.entity_tab.label_id", 17, 95),
-		Time("gui.cannontracer.entity_tab.label_time", 117, 45),
-		Thickness("gui.cannontracer.entity_tab.label_thickness", 167, 95),
-		HitBoxRadius("gui.cannontracer.entity_tab.label_hitBoxRadius", 267, 95),
-		Red("gui.cannontracer.entity_tab.label_red", 367, 45),
-		Green("gui.cannontracer.entity_tab.label_green", 417, 45),
-		Blue("gui.cannontracer.entity_tab.label_blue", 467, 45),
-		Alpha("gui.cannontracer.entity_tab.label_alpha", 517, 45),
-		Render("gui.cannontracer.entity_tab.label_render", 567, 45);
+		EntityID("gui.cannontracer.entity_tab.label_id", 17, 80),
+		Time("gui.cannontracer.entity_tab.label_time", 101, 45),
+		Thickness("gui.cannontracer.entity_tab.label_thickness", 150, 80),
+		HitBoxRadius("gui.cannontracer.entity_tab.label_hitBoxRadius", 234, 80),
+		Red("gui.cannontracer.entity_tab.label_red", 318, 45),
+		Green("gui.cannontracer.entity_tab.label_green", 367, 45),
+		Blue("gui.cannontracer.entity_tab.label_blue", 416, 45),
+		Alpha("gui.cannontracer.entity_tab.label_alpha", 465, 45),
+		Render("gui.cannontracer.entity_tab.label_render", 514, 45),
+		ExposureBox("gui.cannontracer.entity_tab.label_exposureBox", 563, 45);
 
 		public final String labelTranslatableID;
 		private final int startX;
