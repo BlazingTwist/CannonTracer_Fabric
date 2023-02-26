@@ -52,7 +52,7 @@ public class ClientPacketHandler {
 		}
 
 		MutableText message = Text.literal("Looks like you're trying to send messages to the server, but are not registered yet. Try ").formatted(Formatting.RED);
-		message.append(Text.literal("'/tracer register'").formatted(Formatting.AQUA));
+		message.append(Text.literal("'/cts register'").formatted(Formatting.AQUA));
 		player.sendMessage(message);
 	}
 
